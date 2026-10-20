@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shopify Kits Manager</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brandmark">SK</div>
+    <div><h1>Shopify Kits Manager</h1><p>Productos, kits y componentes en un solo lugar</p></div>
+    <div class="top-actions"><button id="refreshBtn" class="secondary">Actualizar datos</button><a class="button" href="/api/export.xlsx">Exportar Excel</a></div>
+  </header>
+  <main class="wrap">
+    <section id="alert" class="alert hidden"></section>
+    <section class="cards">
+      <article class="metric"><span>Productos consultados</span><strong id="totalProducts">—</strong><small>Activos y en borrador</small></article>
+      <article class="metric"><span>Activos</span><strong id="activeProducts">—</strong><small>Publicados en Shopify</small></article>
+      <article class="metric"><span>En borrador</span><strong id="draftProducts">—</strong><small>No publicados</small></article>
+      <article class="metric"><span>Kits / bundles</span><strong id="totalBundles">—</strong><small>Según la relación importada</small></article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div><h2>Productos Shopify</h2><p>Enlaces directos al administrador y a la página del producto.</p></div><span id="updatedAt" class="muted"></span></div>
+      <div class="filters">
+        <input id="search" type="search" placeholder="Buscar por título, handle o SKU…">
+        <select id="statusFilter"><option value="ALL">Todos los estatus</option><option value="ACTIVE">Activo</option><option value="DRAFT">Borrador</option></select>
+        <button id="searchBtn">Buscar</button>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>Producto</th><th>Estatus</th><th>SKU</th><th>Variantes</th><th>Enlaces</th></tr></thead><tbody id="productsBody"><tr><td colspan="5" class="empty">Conecta Shopify para consultar los productos.</td></tr></tbody></table></div>
+      <div id="productCount" class="table-foot"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div><h2>Kits y bundles</h2><p>Las asociaciones se importan desde CSV porque Shopify y las apps de bundles no comparten un formato universal.</p></div><a class="text-link" href="/api/bundles-template.csv">Descargar plantilla CSV</a></div>
+      <form id="importForm" class="import-row">
+        <label class="file-pick">Importar relación de bundles (CSV)<input id="csvFile" type="file" accept=".csv,text/csv" required></label>
+        <button type="submit">Importar CSV</button>
+      </form>
+      <p class="hint">Columnas: <code>bundle_title</code>, <code>bundle_handle</code>, <code>component_product_id</code>, <code>component_title</code>, <code>component_handle</code>, <code>quantity</code>. Usa el ID de Shopify o el handle del componente.</p>
+      <div id="bundlesContainer"><div class="empty">Aún no se han cargado relaciones de bundles.</div></div>
+    </section>
+    <footer>Las credenciales de Shopify se mantienen en el servidor. Los bundles se muestran según la relación CSV importada; no se detectan automáticamente todas las apps de terceros.</footer>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

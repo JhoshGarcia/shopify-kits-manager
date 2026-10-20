@@ -1,0 +1,10 @@
+[
+  {
+    "bundle_title": "Ejemplo de Kit",
+    "bundle_handle": "ejemplo-de-kit",
+    "component_product_id": "gid://shopify/Product/123456789",
+    "component_title": "Producto componente",
+    "component_handle": "producto-componente",
+    "quantity": 1
+  }
+]
